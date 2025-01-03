@@ -1,0 +1,85 @@
+1.
+select * from emp where deptno = (select deptno from dept where loc = 'DALLAS');
+
+2.select * from emp where empno = (select mgr from emp where ename = 'TURNER');
+3.select * from emp where sal = (select max(sal) from emp) ;
+4.select * from emp where sal = (select min(sal) from emp);
+5.select * from emp where hiredate = (select min(hiredate) from emp);
+6.select * from emp where hiredate = (select max(hiredate) from emp);
+
+7.select max(sal) from emp where 
+ sal<(select max(sal) from emp);
+8.select max(sal) from emp where
+sal<(select max(sal) from emp where
+sal<(select max(sal) from emp));
+
+
+
+11.select min(sal) from emp where 
+sal>(select min(sal) from emp);
+12.select min(sal) from emp where 
+sal>(select min(sal) from emp where
+sal>(select min(sal) from emp));
+
+15.select min(hiredate) from emp where 
+hiredate>(select min(hiredate) from emp);
+
+29.select loc from dept where deptno = 
+(select deptno from emp where empno =
+ (select mgr from emp where ename = 'SMITH'));
+
+ 30.select loc from dept where deptno = 
+ (select deptno from emp where empno =
+ (select mgr from emp where empno =
+ (select mgr from emp where ename = 'SMITH')))
+
+ 32.select loc from dept where deptno = 
+ (select deptno from emp where empno = 
+ (select mgr from emp where empno =
+ (select mgr from emp where empno =
+ (select mgr from emp whre ename = 'SMITH'))));
+
+34. select * from emp where sal > (select sal from emp where ename = 'TURNER') and
+ sal<(select sal from emp where ename = 'KING');
+
+----------------------------------------------------
+35.select * from emp where job IN                  -
+(select DISTINCT job from emp where deptno  =      -
+(select deptno from dept where dname =             - 
+'ACCOUNTING'));                                    -
+----------------------------------------------------
+
+36.select * from emp sal IN (select sal from emp group by sal having count(*)>1);  
+
+37.select * from emp where sal IN (select sal from emp group by sal having count(*) = 1);
+
+38.select * from emp where MGR = (select empno from emp where ename = 'BLAKE');
+
+39.select * from emp where empno IN 
+(select mgr from emp where ename IN ('ADAMS','MILLER'));
+
+40.select * from emp where empno IN
+(select mgr from emp);
+
+41.select * from emp where hiredate IN 
+(select hiredate from emp whre ename = 'JAMES');
+
+42.select * from emp where extract(month from hiredate) IN
+(select extract(month from hiredate) from emp group by extract(month from hiredate)
+  having count(*) > 1);
+
+
+43.select * from emp where sal < (select sal from emp where empno IN (select mgr from emp where ename ='SMITH'));
+
+44.select * from emp where empno IN 
+(select mgr from emp group by mgr 
+having count(*) >=4);
+
+45.select count(*) from emp where deptno IN
+(select deptno from dept where loc = 'NEW YORK');
+
+46.select loc from dept where deptno IN 
+(select deptno from emp group by deptno
+ having count(*)>= 4);
+
+ 47.

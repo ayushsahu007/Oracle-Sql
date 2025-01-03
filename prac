@@ -1,0 +1,78 @@
+DDL 
+1.create table 
+create table TABN(colN datatype constrains);
+2.Alter
+      1.rename - alter table Tabn rename col old to nne
+      2.add.   - alter table tabn add col data 
+      3.modify - alter tab tabn modify col data cons
+      4.drop    - alter tab tabn drop col coln
+      5.rename table alter tab tabn rename to newN
+3.Drop  - drop table tabn
+4.truncate truncate tabl tabn
+
+DML 
+1.insert - insert into table values(val1, val2);
+           insert into table(col1,col2) values(val1,val2);
+2.Update   update tabN
+           set col = val ,col = val
+           where cond
+3.delete   delete from tabl
+            where cond
+
+DQL - distinct - select distinct coln from tab
+      projection - select */distinct col/exp as alias from tabn
+      select      - select */distinct col/exp from tab where cond
+DCL  - grant     select sqlstatemnt on tabN to userN
+       revoke     slect sql s on tabN from user
+TCL  commit 
+      rollback
+      savepoint ssn 
+
+      case 
+      when con1 then res 1
+      when con2 then res 2
+      else 
+      res
+      end
+
+      copy
+      seleec tab tabN as (select * from tabn where 1=0
+
+
+      Functiom 
+      1.single row function
+             1.character - 
+                         1.case 
+                               1.lower(arg)
+                               2.upeer(arg)
+                               3.initcap(arg)
+                         2.charcter
+                                1.substr(os,pos,len)
+                                2.replace(os,sub,new)
+                                3.trim(leading/trailing/both char from os)
+                                4.instr(os,char,le,n )
+                                5.reverse(arg)
+                                6.concat(agr || agr
+             2.Number - 
+                        1.mod(a,b)=rem
+                        2.power(a,b)
+                        3.squre(num)
+                        4.round(num,scale)
+                        5.trunc(num,scale)
+                        6.abs(num)
+                        7.len()
+            3.date
+                        1.add_month(date,no of month)
+                        2.month_between(date1,date2)
+                        3.extract(year/month/day from colN)
+                        4.last_day(date)
+            4.Genral - nal(ar1,ar2)
+                       nal2(ar1,ar2,ar3)
+
+
+      2. Multi row function/aggregate funcation/group g
+                         min,max,sum,avg,count
+
+
+       sUBQURY - Select * ........ from emp where col/exp oprater(select ) 
+            gorip

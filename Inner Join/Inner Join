@@ -1,0 +1,572 @@
+1.WQTD first_name ,department_name,city,country_name 
+Orcle - 
+    select first_name,department_name,city,country_name from 
+    employees e,departments d,locations l,countries c where 
+    e.department_id = d.department_id and
+    d.location_id = l.location_id and
+    l.country_id= c.country_id;
+
+ANSI - select first_name,department_name,city,country_name from
+       employees e inner join departments d on e.department_id = d.department_id
+       inner join locations l on d.location_id = l.location_id inner join  countries c on l.country_id = c.country_id;
+-----------------------------------------------------------------------------------------------
+2.WQTD first_name,country_name,region_name
+Orcle - 
+    select first_name,country_name,region_name from 
+    employees e,departments d,locations l,countries c ,regions r where 
+    e.department_id = d.department_id and
+    d.location_id = l.location_id and
+    l.country_id= c.country_id and 
+    c.region_id = r.region_id;
+
+ ANSI - 
+    select first_name,country_name,region_name from 
+    employees e inner join departments d on e.department_id = d.department_id
+    inner join locations l on d.location_id = l.location_id 
+    inner join countries c on l.country_id = c.country_id
+    inner join regions r on c.region_id = r.region_id;
+-------------------------------------------------------------------------------------------------
+ 3.WQTD first_name , region_name where region name is america
+ Orcle - 
+    select first_name,country_name,region_name from 
+    employees e,departments d,locations l,countries c ,regions r where 
+    e.department_id = d.department_id and
+    d.location_id = l.location_id and
+    l.country_id= c.country_id and 
+    c.region_id = r.region_id and
+    region_name = 'Americas';
+
+ANSI - select first_name,country_name,region_name from 
+    employees e inner join departments d on e.department_id = d.department_id
+    inner join locations l on d.location_id = l.location_id 
+    inner join countries c on l.country_id = c.country_id
+    inner join regions r on c.region_id = r.region_id 
+    where region_name = 'Americas';
+---------------------------------------------------------------------------------------------------
+4.WQTD first_name,country_name where country name is united kingdom ,india,brazil
+Orcle - 
+  select first_name,country_name from 
+    employees e,departments d,locations l,countries c where 
+    e.department_id = d.department_id and
+    d.location_id = l.location_id and
+    l.country_id= c.country_id and 
+    country_name IN ('United Kingdom','India','Brazil');
+ANSI _ 
+     select first_name,country_name from 
+    employees e inner join departments d on e.department_id = d.department_id
+    inner join locations l on d.location_id = l.location_id 
+    inner join countries c on l.country_id = c.country_id
+    WHERE country_name IN ('United Kingdom','India','Brazil');
+-------------------------------------------------------------------------------------------------
+5.WQTD employee 1st name ,city where name is Alisa alexzender,juilet
+Orcle - 
+    select first_name,city from 
+    employees e,departments d,locations l where 
+    e.department_id = d.department_id and
+    d.location_id = l.location_id and
+    first_name IN ('Alyssa ','Alexander','Julia');
+ANSI - 
+       select first_name,city from 
+    employees e inner join departments d on e.department_id = d.department_id
+    inner join locations l on d.location_id = l.location_id 
+    WHERE first_name in ('Alyssa ','Alexander','Julia');
+--------------------------------------------------------------------------------------------------
+6.WQTD 1st name,Job title
+ Orcle - 
+        select first_name , job_title from 
+        employees e,jobs j where 
+        e.job_id = j.job_id;
+ANSI - 
+        select first_name,job_title from employees e inner join jobs j 
+        on e.job_id = j.job_id;
+-------------------------------------------------------------------------------------------------
+7.WQTD 1st name,Job title,city
+Orcle - 
+    select first_name,job_title,city from 
+    employees e,departments d,locations l,jobs j where 
+    e.department_id = d.department_id and
+    d.location_id = l.location_id and
+    e.job_id = j.job_id;
+
+ANSI - select first_name,job_title,city from 
+       employees e inner join departments d on e.department_id = d.department_id
+       inner join locations l on d.location_id = l.location_id inner join 
+       jobs j on e.job_id = j.job_id ; 
+--------------------------------------------------------------------------------------------------
+8.WQTD 1st name,region name,job title
+Orcle - 
+    select first_name,region_name,job_title from 
+    employees e,departments d,locations l,countries c ,regions r ,jobs j where 
+    e.department_id = d.department_id and
+    d.location_id = l.location_id and
+    l.country_id= c.country_id and 
+    c.region_id = r.region_id and
+    e.job_id = j.job_id;
+
+ANSI - select first_name,job_title,region_name from 
+       employees e inner join departments d on e.department_id = d.department_id
+       inner join locations l on d.location_id = l.location_id inner join
+       countries c on l.country_id = c.country_id inner join 
+       regions r on c.region_id = r.region_id inner join 
+       jobs j on e.job_id = j.job_id ; 
+    -----------------------------------------------------------------------------------------------
+9.no. of employee , working in each department 
+
+Orcle - SELECT COUNT(*) AS employee_count, d.department_name
+        FROM employees e, departments d
+        WHERE e.department_id = d.department_id
+        GROUP BY d.department_name;
+
+ANSI -- select count(*) as count_emp,d.department_name from 
+       employees e inner join departments d on e.department_id = d.department_id
+       group by d.department_name;
+----------------------------------------------------------------------------------------------------
+10.no. of employee , working in each city
+
+Orcle - SELECT COUNT(*) AS employee_count,l.city
+        FROM employees e, departments d,locations l
+        WHERE e.department_id = d.department_id and
+        d.location_id = l.location_id 
+        GROUP BY l.city;
+ANSI - 
+        select count(*) as count_emp,l.city from 
+        employees e inner join departments d on e.department_id = d.department_id
+       inner join locations l on d.location_id = l.location_id 
+       group by l.city;
+----------------------------------------------------------------------------------------------------
+11.no. of employee , working in each country
+
+Orcle -  SELECT COUNT(*) AS employee_count,country_name
+        FROM employees e, departments d,locations l,countries c
+        WHERE e.department_id = d.department_id and
+        d.location_id = l.location_id and
+        l.country_id = c.country_id
+        GROUP BY c.country_name;
+
+ANSI - 
+        SELECT COUNT(*) AS employee_count,country_name from
+        
+
+       group by c.country_name;
+----------------------------------------------------------------------------------------------------
+12.no. of employee , working in each region
+
+Orcle - SELECT COUNT(*) AS employee_count,region_name
+        FROM employees e, departments d,locations l,countries c,regions r
+        WHERE e.department_id = d.department_id and
+        d.location_id = l.location_id and
+        l.country_id = c.country_id and
+        c.region_id = r.region_id
+        GROUP BY r.region_name;
+ANSI - 
+          SELECT COUNT(*) AS employee_count,region_name from
+         employees e inner join departments d on e.department_id = d.department_id
+       inner join locations l on d.location_id = l.location_id inner join
+       countries c on l.country_id = c.country_id inner join 
+       regions r on c.region_id = r.region_id 
+       group by r.region_name;
+----------------------------------------------------------------------------------------------------
+13.top 2 country name with no.of employee
+
+Orcle -  SELECT *FROM (
+    SELECT COUNT(*) AS employee_count, c.country_name
+    FROM employees e, departments d, locations l, countries c
+    WHERE e.department_id = d.department_id
+      AND d.location_id = l.location_id
+      AND l.country_id = c.country_id
+    GROUP BY c.country_name
+    ORDER BY employee_count DESC )
+    WHERE ROWNUM <= 2; 
+
+ANSI -  SELECT *FROM (
+    SELECT COUNT(*) AS employee_count, c.country_name FROM
+    employees e inner join departments d on e.department_id = d.department_id
+       inner join locations l on d.location_id = l.location_id inner join
+       countries c on l.country_id = c.country_id
+       GROUP BY c.country_name
+    ORDER BY employee_count DESC )
+    WHERE ROWNUM <= 2;  
+----------------------------------------------------------------------------------------------------
+
+14.WQTD ename , grade
+Oracle - select ename,grade from emp,salgrade
+        where sal between losal and hisal;
+
+-----------------------------------------------------------------------------------------------
+
+15.WQTD ename,grade,sal
+Oracle  - select ename,grade,sal from emp,salgrade
+        where sal between losal and hisal;
+----------------------------------------------------------------------------------------------------
+
+16.WQTD manager name,sal,grade
+Oracle - select ename,sal,grade from emp,salgrade  where
+          emp.sal between losal and hisal and empno IN (select mgr from emp);
+
+----------------------------------------------------------------------------------------------------
+17.WQTD emp name,grade,location
+oracle - select e.ename,g.grade,d.loc from emp e,dept d,salgrade g
+         where e.deptno = d.deptno and e.sal between losal and hisal; 
+----------------------------------------------------------------------------------------------------
+18.WQTD manager name,grade,location
+        select e.ename,g.grade,d.loc from emp e,dept d,salgrade g
+         where e.deptno = d.deptno and e.sal between losal and hisal 
+         and empno IN (select mgr from emp);
+----------------------------------------------------------------------------------------------------
+19.No.of Emp in each Location
+Orcle - select count(*)as emp_count,loc
+        from emp,dept where emp.deptno = dept.deptno
+        group by dept.loc;
+
+ANSI  - select count(*),ename from 
+        emp inner join dept on
+        emp.deptno = dept.deptno;
+----------------------------------------------------------------------------------------------------
+20.No.of manager in each location
+orcle - select count(*) as mgr_count,mgr,loc
+        from emp e,dept d where e.deptno = d.deptno; 
+----------------------------------------------------------------------------------------------------
+21.Movie name,director name
+oracle - select movie_name,director_name from 
+         movies m,directors d where 
+         m.dirctor_id = d.director_id
+
+ANSI -   select movie_name,director_name from 
+         movies m inner join directors d on 
+         m.director_id = d.director_id;
+----------------------------------------------------------------------------------------------------
+22.movie name,movie ratings
+oracle - select movie_name,movie_ratings from
+         movies m,movie_ratings mr Where
+         m.movie_id = mr.movie_id
+
+ANSI -   select movie_name,rating from
+         movies m inner join movie_ratings mr on
+         m.movie_id = mr.movie_id
+----------------------------------------------------------------------------------------------------
+23.movie name , actor name
+oracle  - select movie_name,actor_name from
+          movies m,movie_cast mc,actors a where
+          m.movie_id = mc.movie_id and mc.actor_id = a.actor_id
+
+ANSI  -   select movie_name,actor_name from
+          movies m inner join movie_cast mc on
+          m.movie_id = mc.movie_id inner join actors a 
+          on mc.actor_id = a.actor_id;
+----------------------------------------------------------------------------------------------------
+24.movie name,genere type
+oracle - select movie_name,genre_name from 
+         movies m,movie_genre mg,genre g where
+         m.movie_id = mg.movie_id and mg.genre_id = g.genre_id;
+
+ANSI  -  select movie_name,genre_name from 
+         movies m inner join movie_genre mg on
+         m.movie_id = mg.movie_id inner join 
+         genre g on mg.genre_id = g.genre_id;
+----------------------------------------------------------------------------------------------------
+25.movie name ,dirctor name ,actor name ,genre type,movie rating
+oracle - select movie_name,director_name,actor_name,genre_name,movie_rating from
+         movies m,directors d,actors a,genre g,movie_ratings mr,movie_genre mg,movie_cast mc where m.director_id = d.director_id and
+         m.movie_id = mc.movie_id and
+         mc.actor_id = a.actor_id and
+         m.movie_id = mg.movie_id and
+         mg.genre_id = g.genre_id and
+         m.movie_id = mr.movie_id
+
+ANSI - select movie_name,director_name,actor_name,genre_name,movie_rating
+       from movies m inner join directors d on m.director_id = d.director_id
+       inner join movie_cast mc on m.movie_id = mc.movie_id inner join actors a 
+       on mc.actor_id = a.actor_id inner join movie_genre mg on m.movie_id = mg.movie_id
+       inner join genre g on mg.genre_id = g.genre_id inner join movie_rating mr on 
+       m.movie_id = mr.movie_id; 
+----------------------------------------------------------------------------------------------------
+26.no.of movie ,dirctor name
+oracle - select count(*),director_name from 
+         movies m,directors d where
+         m.director_id = d.director_id
+         group by director_name;
+
+ANSI -   select count(*),director_name
+         from movies m inner join directors d on
+         m.director_id = d.director_id 
+         group by director_name;
+----------------------------------------------------------------------------------------------------
+27.no.of movie with actor name
+Oracle - select count(*),actor_name from
+         movies m,movie_cast mc,actor a where
+         m.movie_id = mc.movie_id and
+         mc.actor_id = a.actor_id
+         group by actor_name;
+
+ANSI   - select count(*),actor_name from
+         movies m inner join movie_cast mc on 
+         m.movie_id = mc.movie_id inner join actors a
+         on mc.actor_id = a.actor_id
+         group by actor_name;
+----------------------------------------------------------------------------------------------------
+28.no.of movie with genre type
+Oracle - select count(*),genre_name
+         movies m,movie_genre mg,genre g where
+         m.movie_id = mg.movie_id and
+         mg.genre_id = g.genre_id 
+         group by genre_name;
+
+ANSI -   select count(*),genre_name from
+         movies m inner join movie_genre mg on 
+         m.movie_id = mg.movie_id inner join genre g
+         on mg.genre_id = g.genre_id
+         group by genre_name;
+
+----------------------------------------------------------------------------------------------------
+29.wqtd movie name,dirctor name,actor name where actor name is 'Yash','Prabhas'
+Oracle - select movie_name,director_name,actor_name from
+         movies m,directors d,movie_cast mc,actor a where
+         m.director_id = d.director_id and
+         m.movie_id = mc.movie_id and
+         mc.actor_id = a.actor_id
+         and actor_name IN ('Yash','Prabhas');
+
+ANSI -   select movie_name,director_name,actor_name from 
+        from movies m inner join directors d on m.director_id = d.director_id
+       inner join movie_cast mc on m.movie_id = mc.movie_id inner join actors a 
+       on mc.actor_id = a.actor_id where actor_name IN ('Yash','Prabhas');
+
+----------------------------------------------------------------------------------------------------
+30.wqtd movie name ,genre type,dirctor name where the director is 'Rajmoli','prashanthnil','Rgv'
+Oracle - select movie_name,genre_name,director_name from
+         movies m,directors d,genres g,movie_genre mg where
+         m.director_id = d.director_id and
+         m.movie_id = mg.movie_id and
+         mg.genre_id = g.genre_id and
+         director_name IN ('Rajmoli','prashanthnil','Rgv');
+
+ANSI  - select movie_name,director_name,genre_name
+       from movies m inner join directors d on m.director_id = d.director_id
+       inner join movie_genre mg on m.movie_id = mg.movie_id
+       inner join genre g on mg.genre_id = g.genre_id where
+       director_name IN ('Rajmoli','prashanthnil','Rgv');
+----------------------------------------------------------------------------------------------------
+31.wqtd movie name ,actor name,genre type where the genre type action,romantic ,thirller
+Oracle - select movie_name,actor_name,genre_name from
+         movies m,movie_genre mg,movie_cast mc,actor a where
+         m.movie_id = mc.movie_id and
+         mc.actor_id = a.actor_id and
+         m.movie_id = mg.movie_id and
+         mg.genre_id = g.genre_id and
+         genre_name IN ('actor','romantic','thirller');
+
+ANSI - select movie_name,actor_name,genre_name
+       from movies m inner join movie_cast mc on m.movie_id = mc.movie_id inner join actors a 
+       on mc.actor_id = a.actor_id inner join movie_genre mg on m.movie_id = mg.movie_id
+       inner join genre g on mg.genre_id = g.genre_id 
+       where genre_name IN ('actor','romantic','thirller'); 
+----------------------------------------------------------------------------------------------------
+32.wqtd ename ,sal,loc,grade where emp earing unique sal
+Oracle - select ename,sal,loc,grade from
+         emp,dept,salgrade where 
+         emp.deptno = dept.deptno and
+         (sal between losal and hisal) and
+         sal IN (select sal from emp group by sal
+         having count(*)=1);
+ANSI -   select ename,sal,loc,grade from
+         emp inner join dept on emp.deptno = dept.deptno inner join salgrade on 
+----------------------------------------------------------------------------------------------------
+33.wqtd max sal,min sal,avg sal,total sal present in each location 
+Oracle - select max(sal),min(sal),avg(sal),sum(sal),loc from
+         emp,dept where emp.deptno = dept.deptno
+         group by loc;
+----------------------------------------------------------------------------------------------------
+34.wqtd highest no.of movie directed by director
+ANSI - select * from(select count(*),director_name from directors d inner join movies m
+       on d.director_id = m.director_id group by director_name
+       order by count(*) desc)
+       where rownum = 1;
+Oracle - select * from(select count(*))
+----------------------------------------------------------------------------------------------------
+35.highest no.of movie actored by an actor
+Oracle - select * from(select count(*),actor_name from actors a,movie_cast mc,movies m
+         on a.actor_id = mc.actor_id and mc.movie_id = m.movie_id
+         group by actor_name order by count(*) desc)
+         where rownum = 1;
+----------------------------------------------------------------------------------------------------
+36.top two director with no.of movies
+ANSI  - select * from(select count(*),director_name from directors d inner join movies m
+       on d.director_id = m.director_id group by director_name
+       order by count(*) desc)
+       where rownum <= 2;
+----------------------------------------------------------------------------------------------------
+37.top two actor with no.of movies
+Oracle - select * from(select count(*),actor_name from actors a,movie_cast mc,movies m
+         on a.actor_id = mc.actor_id and mc.movie_id = m.movie_id
+         group by actor_name order by count(*) desc)
+         where rownum <=2;
+----------------------------------------------------------------------------------------------------
+38.genre type with highest no. of movies
+Oracle - select * from (select count(*),genre_name from movies m,movie_genre mg,genre g
+         on m.movie_id = mg.movie_id and mg.genre_id = g.genre_id
+         group by genre_name order by count(*) desc)
+         where rownum = 1;
+----------------------------------------------------------------------------------------------------
+39.top two genre type with no .of movies
+Oracle - select * from (select count(*),genre_name from movies m,movie_genre mg,genre g
+         on m.movie_id = mg.movie_id and mg.genre_id = g.genre_id
+         group by genre_name order by count(*) desc)
+         where rownum <=2;
+----------------------------------------------------------------------------------------------------
+40.wqtd manager name,loc where at least 3 emp or reporting to managaer
+Oracle - select ename,loc from emp, dept where
+         emp.deptno = dept.deptno and 
+         empno IN (select mgr from emp group by mgr having count(*) >=3);
+----------------------------------------------------------------------------------------------------
+41.wqtd even no.of records
+ - select * from (select emp.*,rownum r from emp)
+   where mod(r,2) = 0;
+----------------------------------------------------------------------------------------------------
+42.wqtd odd no.of records
+   select * from (select emp.*,rownum r from emp)
+   where mod(r,2) = 1;
+----------------------------------------------------------------------------------------------------
+43.even no.of records with loc
+    
+----------------------------------------------------------------------------------------------------
+44.odd no.of records with loc
+----------------------------------------------------------------------------------------------------
+45.even no.of emp records with loc
+----------------------------------------------------------------------------------------------------
+46.odd no.of emp records with loc
+----------------------------------------------------------------------------------------------------
+
+
+
+....................................................................................................MOVIE SCHEMA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  1.Table - Directors 
+    CREATE TABLE Directors (
+    director_id NUMBER PRIMARY KEY,
+    director_name VARCHAR2(100) NOT NULL,
+    director_email VARCHAR2(100) UNIQUE
+    );
+
+  2.Table -Actors 
+    CREATE TABLE Actors (
+    actor_id NUMBER PRIMARY KEY,
+    actor_name VARCHAR2(100) NOT NULL,
+    actor_gender VARCHAR2(10),
+    actor_number VARCHAR2(15) UNIQUE
+    );
+
+
+  3.Table - MOVIES 
+    CREATE TABLE Movies (
+    movie_id NUMBER PRIMARY KEY,
+    movie_name VARCHAR2(100) NOT NULL,
+    release_date DATE,
+    director_id NUMBER,
+    foreign key(director_id)references directors(director_id)
+    );
+
+  4.Table - Genre
+    CREATE TABLE Genre (
+    genre_id NUMBER PRIMARY KEY,
+    genre_name VARCHAR2(50) NOT NULL
+    );
+  
+  5.Table - Movie_rating
+    CREATE TABLE Movie_Ratings (
+    movie_id NUMBER,
+    rating NUMBER,
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id)
+    );
+
+  6.Table - Movie_cast
+    CREATE TABLE Movie_Cast (
+    movie_id NUMBER NOT NULL,
+    actor_id NUMBER NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id),
+    FOREIGN KEY (actor_id) REFERENCES Actors(actor_id),
+    PRIMARY KEY (movie_id, actor_id)
+    );
+ 
+  7.Table - Movie_genre
+    CREATE TABLE Movie_Genre (
+    movie_id NUMBER NOT NULL,
+    genre_id NUMBER NOT NULL,
+    FOREIGN KEY (movie_id) REFERENCES Movies(movie_id),
+    FOREIGN KEY (genre_id) REFERENCES Genre(genre_id),
+    PRIMARY KEY (movie_id, genre_id)
+    );
+
+1.for directors table - 
+INSERT INTO Directors (director_id, director_name, director_email) VALUES (101, 'Christopher Nolan', 'nolan@example.com');
+INSERT INTO Directors (director_id, director_name, director_email) VALUES (102, 'Lana Wachowski', 'lana@example.com');
+INSERT INTO Directors (director_id, director_name, director_email) VALUES (103, 'Steven Spielberg', 'spielberg@example.com');
+INSERT INTO Directors (director_id, director_name, director_email) VALUES (104, 'Quentin Tarantino', 'tarantino@example.com');
+INSERT INTO Directors (director_id, director_name, director_email) VALUES (105, 'Martin Scorsese', 'scorsese@example.com');
+INSERT INTO Directors (director_id, director_name, director_email) VALUES (103, 'Quentin Tarantino', 'quentin@example.com');
+INSERT INTO Directors (director_id, director_name, director_email) VALUES (104, 'Steven Spielberg', 'spielberg@example.com');
+INSERT INTO Directors (director_id, director_name, director_email) VALUES (105, 'Martin Scorsese', 'scorsese@example.com');
+INSERT INTO Directors (director_id, director_name, director_email) VALUES (106, 'Ridley Scott', 'ridley@example.com');
+INSERT INTO Directors (director_id, director_name, director_email) VALUES (107, 'James Cameron', 'cameron@example.com');
+
+2.For Actors 
+INSERT INTO Actors (actor_id, actor_name, actor_gender, actor_number) VALUES (1, 'Shah Rukh Khan', 'Male', '9123456789');
+INSERT INTO Actors (actor_id, actor_name, actor_gender, actor_number) VALUES (2, 'Deepika Padukone', 'Female', '9134567890');
+INSERT INTO Actors (actor_id, actor_name, actor_gender, actor_number) VALUES (3, 'Aamir Khan', 'Male', '9145678901');
+INSERT INTO Actors (actor_id, actor_name, actor_gender, actor_number) VALUES (4, 'Priyanka Chopra', 'Female', '9156789012');
+INSERT INTO Actors (actor_id, actor_name, actor_gender, actor_number) VALUES (5, 'Ranveer Singh', 'Male', '9167890123');
+INSERT INTO Actors (actor_id, actor_name, actor_gender, actor_number) VALUES (6, 'Alia Bhatt', 'Female', '9178901234');
+INSERT INTO Actors (actor_id, actor_name, actor_gender, actor_number) VALUES (7, 'Aishwarya Rai', 'Female', '9189012345');
+INSERT INTO Actors (actor_id, actor_name, actor_gender, actor_number) VALUES (8, 'Hrithik Roshan', 'Male', '9190123456');
+INSERT INTO Actors (actor_id, actor_name, actor_gender, actor_number) VALUES (9, 'Salman Khan', 'Male', '9201234567');
+INSERT INTO Actors (actor_id, actor_name, actor_gender, actor_number) VALUES (10, 'Kareena Kapoor', 'Female', '9212345678');
+
+
+For movies table 
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (1, '3 Idiots', TO_DATE('2009-12-25', 'YYYY-MM-DD'), 103);
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (2, 'Chennai Express', TO_DATE('2013-08-08', 'YYYY-MM-DD'), 101);
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (3, 'Bajirao Mastani', TO_DATE('2015-12-18', 'YYYY-MM-DD'), 104);
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (4, 'Dangal', TO_DATE('2016-12-23', 'YYYY-MM-DD'), 105);
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (5, 'Kabhi Khushi Kabhie Gham', TO_DATE('2001-12-14', 'YYYY-MM-DD'), 106);
+
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (6, 'Dilwale', TO_DATE('2015-12-18', 'YYYY-MM-DD'), 101);
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (7, 'Golmaal Again', TO_DATE('2017-10-20', 'YYYY-MM-DD'), 101);
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (8, 'PK', TO_DATE('2014-12-19', 'YYYY-MM-DD'), 103);
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (9, 'Munna Bhai M.B.B.S.', TO_DATE('2003-12-19', 'YYYY-MM-DD'), 103);
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (10, 'Padmaavat', TO_DATE('2018-01-25', 'YYYY-MM-DD'), 104);
+INSERT INTO Movies (movie_id, movie_name, release_date, director_id) VALUES (11, 'Panga', TO_DATE('2020-01-24', 'YYYY-MM-DD'), 105);
+
+for movie cast 
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (1, 1); -- 3 Idiots with Aamir Khan
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (1, 3); -- 3 Idiots with Kareena Kapoor
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (2, 1); -- Chennai Express with Shah Rukh Khan
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (2, 2); -- Chennai Express with Deepika Padukone
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (3, 5); -- Bajirao Mastani with Ranveer Singh
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (3, 4); -- Bajirao Mastani with Priyanka Chopra
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (4, 1); -- Dangal with Aamir Khan
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (5, 9); -- Kabhi Khushi Kabhie Gham with Hrithik Roshan
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (5, 10); -- Kabhi Khushi Kabhie Gham with Kareena Kapoor
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (6, 1); -- Dilwale with Shah Rukh Khan
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (6, 2); -- Dilwale with Kajol
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (7, 6); -- Golmaal Again with Ajay Devgn
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (8, 1); -- PK with Aamir Khan
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (9, 1); -- Munna Bhai M.B.B.S. with Sanjay Dutt
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (10, 7); -- Padmaavat with Ranveer Singh
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (10, 8); -- Padmaavat with Deepika Padukone
+INSERT INTO Movie_Cast (movie_id, actor_id) VALUES (11, 4); -- Panga with Kangana Ranaut
+
+
+for movie_rating 
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (1, 8.5);
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (2, 7.5);
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (3, 8.0);
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (4, 9.0);
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (5, 7.0);
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (6, 6.5);
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (7, 7.8);
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (8, 8.2);
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (9, 8.7);
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (10, 8.3);
+INSERT INTO Movie_Rating (movie_id, rating) VALUES (11, 7.2);
+
+
+
+

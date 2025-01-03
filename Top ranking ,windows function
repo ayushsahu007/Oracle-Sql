@@ -1,0 +1,60 @@
+Top ranking ,windows function
+
+^^^2nd lowest sal
+select * from (select sal,dense_rank()over(order by sal)d from emp) where d =2;
+
+^^^2nd higest sal with loc
+select * from (select d.loc,e.sal,dense_rank()over(order by sal desc)d from emp e,dept d where e.deptno = d.deptno) where d =2;
+
+^^^2nd higest sal with each loc
+select * from (select d.loc,e.sal,dense_rank()over(partition by loc order by sal desc)d from emp e,dept d where e.deptno = d.deptno) where d =2;
+
+^^^2nd higest sal each dept name
+select * from (select d.dname,e.sal,dense_rank()over(partition by dname order by sal desc)de from emp e,dept d where e.deptno = d.deptno) where de = 2 ;
+
+^^^3,5,6 higest sal
+select * from (select sal,dense_rank()over(order by sal desc)d from emp) where d IN (3,5,6);
+
+^^^3,5,6 higest sal along emp details
+select * from (select emp.*,dense_rank()over(order by sal desc)d from emp) where d IN (3,5,6);
+
+
+^^^3,5,6 higest sal with loc
+select * from (select d.loc,e.sal,dense_rank()over(order by sal desc)d from emp e,dept d where e.deptno = d.deptno) where d IN (3,5,6);
+
+^^^3,5,6 higest sal with each loc
+select * from (select d.loc,e.sal,dense_rank()over(partition by loc order by sal desc)d from emp e,dept d where e.deptno = d.deptno) where d IN (3,5,6);
+
+^^^3,5,6 higest sal with each dept name
+select * from (select d.dname,e.sal,dense_rank()over(partition by dname order by sal desc)d from emp e,dept d where e.deptno = d.deptno) where d IN (3,5,6);  
+
+
+^^^3,5,6 higest sal,emp name with each dept name
+select * from (select e.ename,d.dname,e.sal,dense_rank()over(partition by dname order by sal desc)d from emp e,dept d where e.deptno = d.deptno) where d IN (3,5,6); 
+
+select a.ename,a.sal from emp a where(select count(distinct b.sal) from emp b where a.sal<= b.sal) IN (3,5,6);
+
+
+///////////////////////////////INTERVIEW QUESTION//////////////////////////////////////////////
+ select ename,hiredate,sal,lag(sal,1,0)over(order by hiredate)prev,sal-lag(sal)over(order by hiredate) from emp;
+
+differnce hiredate day by each loc
+select d.loc,e.ename,hiredate,hiredate - lag(hiredate)over(partition by loc order by hiredate)prev from emp e,dept d where e.deptno=d.deptno;
+
+differnce between hiredate months by each loc
+SELECT d.loc,e.ename,e.hiredate,trunc(MONTHS_BETWEEN(e.hiredate, LAG(e.hiredate) OVER (PARTITION BY d.loc ORDER BY e.hiredate))) AS month_diff FROM emp e JOIN dept d ON e.deptno = d.deptno;
+
+.......................WINE SHOP............................
+question - differnce between price date by same brnad
+SELECT BRAND,PRICE,LAG(PRICE)OVER(PARTITION BY BRAND ORDER BY W_DATE)lag,price - lag(price)OVER(PARTITION BY BRAND ORDER BY W_DATE)old,W_DATE FROM WINESHOP;
+
+
+
+
+ select brand,price,
+  case
+when price>lag(PRICE)over(partition by brand order by w_date) then 'PRICE INCRE'
+ when price<lag(PRICE)over(partition by brand order by w_date) then 'PRICE DECRE'
+  ELSE 'BRAND LAUNCH'
+   END STATUS
+  FROM WINESHOP;

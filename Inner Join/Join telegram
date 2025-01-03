@@ -1,0 +1,265 @@
+1. List ename, job, annual sal, deptno, dname who earn 30000 per year and who are not clerks
+ ORACLE Inner Join  - select e.ename,e.job,e.sal*12,e.deptno,d.dname 
+                      from emp e,dept d where e.deptno = d.deptno 
+                      and e.sal* 12>3000 and e.job != 'CLERK';
+
+2. List out the all employees by name and employee number along with their manager's name and employee number 
+ ORACLE Self Join -   SELECT e1.ename,e1.empno,e2.ename as manager,e2.empno
+                      from emp e1,emp e2 where e1.mgr = e2.empno(+); 
+
+ 3 Display ename,dname even if there no employees working in a particular department.
+Oracle Left join  -   select e.ename,d.dname from dept d,emp e
+                      where d.deptno = e.deptno(+);
+
+ 4 Display the department name along with total salary in each department
+ ORACLE Right join -   select d.dname,sum(e.sal) from emp e,dept d 
+                       where e.deptno(+) = d.deptno 
+                       group by dname;
+
+ 5 Display employee name and department name for each employee
+ Oracle inner Join -     select e.ename,d.dname from emp e,dept d
+                        where e.deptno = d.deptno;
+
+ 6 Display location name of the employee who earn commission 
+  Orale Inner Join   select d.loc,e.ename from emp e,dept d
+                     where e.deptno = d.deptno and e.comm is not null;
+
+ 7 Display Dept name of the employee who earn min salary and have no reporting manager.
+    Oracle    -       select d.dname,e.ename from emp e,dept d
+                      where e.deptno = d.deptno 	
+                      and e.sal = (select min(sal)from emp where mgr is null);
+
+ 8 Display all the employees of Dept 30,10 with their annual salary and having at least 2 employees.
+             select emp.*,sal*12 from emp where deptno IN (select deptno from emp where deptno IN (10,30) group by deptno 
+             having count(*)>=2);
+
+
+ 9 list all the employees whose job is same as scott and their salary greater than Jones.
+              select ename,job from emp 
+              where job = (select job from emp where ename ='SCOTT') and 
+              sal > (select sal from emp where ename ='JONES');
+
+ 10 Display Dept name,loc of all the employees who are reporting to Smith.
+                select ename,dname,loc from emp,dept where 
+                emp.deptno = dept.deptno and mgr = (select empno from emp where ename = 'SMITH');
+
+ 11 List all the Dept name and location of all the salesman manager's manager.
+                 select dname,loc from dept where deptno IN 
+                 (select deptno from emp where empno IN 
+                 (select mgr from emp where empno IN 
+                 (select mgr from emp where job ='SALESMAN')));
+
+                select  d.dname,d.loc from dept d,emp e1,emp e2,emp e3 where 
+                e1.mgr = e2.empno and e2.mgr = e3.empno and e3.deptno = d.deptno 
+                 and e1.job = 'SALESMAN';
+ /////////////////////////////////////////////////////////////////////////////////
+ CHATGPT-        SELECT DISTINCT d.dname, d.loc FROM dept d WHERE d.deptno IN 
+                 (SELECT e.deptno FROM emp e WHERE e.empno IN (SELECT e1.mgr FROM emp e1 WHERE e1.job = 'SALESMAN'));
+
+
+ 12 list employees who are working in research Dept and they are manager
+         select e.ename,d.dname,e.job from emp e,dept d where 
+         e.deptno = d.deptno and d.dname = 'RESEARCH' and e.job = 'MANAGER' ;
+
+ 13 Display the number of employees who are getting salary less than the Blake's manager.
+          select count(*) from emp where sal<(select sal from emp where empno IN 
+          (select mgr from emp where ename ='BLAKE'));
+
+ 14 list the employee deptname and location of all the employees who are analyst,reporting to Blake.
+           select e.ename,d.dname,d.loc from emp e,dept d where e.deptno = d.deptno and 
+           e.job = 'ANALYST'  AND e.mgr = (select empno from emp where ename = 'BLAKE');
+
+ 15 Display the employee names,hiredate,comm of Ford's Manager 
+           select ename,hiredate,comm from emp where empno = (
+           select mgr from emp where ename = 'FORD');
+
+ 16 Display ename, dname of all the employees whose salary less than avg sal of dept 30
+            select e.ename,d.dname from emp e,dept d where 
+            e.deptno = d.deptno and e.sal< (select avg(sal) from emp where deptno = 30) and e.deptno = 30;
+
+ 17 Display ename dname and loc of all the employees who are working for Jones
+            select e.ename,d.dname,d.loc from emp e,dept d where e.deptno = d.deptno
+            and mgr = (select empno from emp where ename = 'JONES');
+
+ 18 Display ename dname of all the employees whose name starts with S
+             select e.ename,d.dname from emp e,dept d where
+             e.deptno = d.deptno and substr(e.ename,1,1) = 'S';
+
+ 19 List the dname who are not having any employee in it
+             select dname from emp,dept d where emp.deptno(+) = d.deptno
+             and emp.empno is null;
+             
+ 20 Display employee who are getting same commission
+             select ename from emp where comm is not null;
+
+ 21 Display all Countries along with the Regions .
+             select c.country_name cn,r.region_name rn from countries c,regions r 
+             where c.region_id = r.region_id;
+
+ 22 Display all Cities and the Country it belongs.
+              select l.city,c.country_name from locations l,countries c where 
+              l.country_id = c.country_id;
+               
+ 23 Display all Regions and their respective Countries and Cities.
+             select r.region_name,c.country_name,l.city 
+             from regions r,countries c,locations l where
+             l.country_id =c.country_id and
+             c.region_id = r.region_id;
+
+ 24 Display all Regions, Countries and Cities which are not belongs to Europe.
+             select r.region_name,c.country_name,l.city 
+             from regions r,countries c,locations l where
+             l.country_id =c.country_id and
+             c.region_id = r.region_id and region_name != 'Europe';
+
+               
+ 25 Display the region name of India.
+          select r.region_name from regions r,countries c where
+           c.region_id = r.region_id and c.country_name = 'India';
+           
+ 26 Display all the Countries along with their Cities and also the countries doesn't have Cities.
+                   select c.country_name,l.city from countries c,locations l
+                   where c.country_id = l.country_id(+);
+                     
+ 27 Display all employees first name and last name as 'employee name ' with their managers first
+               select e2.first_name managar_name,concat(e1.first_name,e1.last_name) employee  from employees e1,employees e2 where e1.manager_id = e2.employee_id(+);
+
+ 28 name and last name as 'manager name ' and also the employees who doesn't have manager.
+          select e2.first_name manager,concat(e1.first_name,e1.last_name) employee from employees e1,employees e2  where e1.manager_id = e2.employee_id(+);
+
+
+
+ 29 Display all departments and the city to which it belongs.
+              select d.department_name,l.city from departments d,locations l where
+              d.location_id = l.location_id(+);
+               
+ 30 Display cities doesn't have any departments.
+         select l.city from departments d,locations l where
+          d.location_id(+) = l.location_id;
+            
+ 31 Display all the Countries of America Region
+            select c.country_name from countries c,regions r 
+            where c.region_id = r.region_id and region_name ='Americas';
+
+ 32 DISPLAY ALL THE DEPT NAMES IRRESPECTIVE OF ANY EMPLOYEE WORKING IN IT OR NOT. IF AN EMPLOYEE IS WORKING DISPLAY HIS NAME.
+                  select d.department_name,e.first_name from employees e,departments d
+                  where e.department_id(+) = d.department_id ;
+
+ 33 WRITE A QUERY TO DISPLAY EMPLOYEE NAME, JOB, DNAME, LOCATION OF ALL EMPLOYEES WHO ARE WORKING AS ACTUAL MANAGERS AND WORKS AT CHICAGO.
+                select e1.ename,e1.job,d.dname,d.loc from emp e1,emp e2,dept d
+                where e1.mgr = e2.empno and e2.deptno = d.deptno and d.loc = 'CHICAGO'; 
+
+ 34 LIST THE DEPARTMENT NAMES IN WHICH THE EMPLOYEES ARE HIRED BETWEEN 1ST OF JAN 1981 AND 31ST DEC 1982 WITH SALARY MORE THAN 1800.
+                select dname from emp inner join dept on emp.deptno = dept.deptno
+                where hiredate between '01-JAN-81' and '31-DEC-82' and sal>1800;
+
+ 35 DISPLAY 2ND LEAST SALARY FROM EMPLOYEE TABLE.
+                   select sal from emp where sal > (select min(sal) from emp);
+
+ 36 LIST THE EMPLOYEES WHOSE ANNUAL SALARY IS GREATER THAN 1500 AND WHO ARE JOINED BEFORE 1982 ONLY.
+              select * from emp where sal*12 > 1500 and hiredate < '01-JAN-82';
+
+ 37 DISPLAY DNAME, LOC, DEPTNO OF EMPLOYEES WHO HAS SAME REPORTING MANAGER 
+
+ 38 DISPLAY EMPLOYEE NAME ALONG WITH THEIR MANAGER NAME.
+              select e1.ename,e2.ename as manager from emp e1,emp e2 
+              where e1.mgr = e2.empno;
+
+ 39 DISPLAY EMPLOYEE NAME AND HIS DEPT NAME FOR THE EMPLOYEES WHOSE NAME STARTS WITH ‘S’.
+               select ename,dname from emp,dept where emp.deptno = dept.deptno and
+               substr(ename,1,1) = 'S';
+
+ 40 DISPLAY EMPLOYEES WHO ARE GETTING SAME SALARY.
+     //    select ename,sal from emp 
+        group by sal,ename
+        having count(*)>1;
+
+ 41 Display all the employees whose job same as 'SMITH' and department same as 'JONES' and salary more than 'SCOTT
+              select ename from emp where
+               job =(select job from emp where ename = 'SMITH')and deptno = (select deptno from dept where ename ='JONES') and 
+              sal > (select sal from emp where ename ='SCOTT');
+          
+ 42 ASSIGNMENTS ON EQUI-JOINS
+ 43 Display all the managers & clerks who work in Accounts and Marketing departments.   
+                   select ename from emp e,dept d where e.deptno = d.deptno and job IN 
+                   ('Managers','Clerks') and dname IN ('Accounts','Marketing');
+                      
+ 44 Display all the salesmen who are not located at DALLAS.
+                 select ename from emp e,dept d where job = 'Salesmen' and 
+                 loc != 'DALLAS';
+
+ 45 Select department name & location of all the employees working for CLARK.
+               select dname,loc from emp e,dept d where e.deptno = d.deptno 
+               and mgr = (select empno from emp where ename = 'CLARK');
+
+ 46 Select all the departmental information for all the managers
+       select d.* from dept d,emp e where d.deptno=e.deptno 
+         and empno IN (select mgr from emp);
+
+ 47 Select all the employees who work in DALLAS.
+             select e.* from emp e,dept d where e.deptno = d.deptno
+             and loc = 'DALLAS';
+
+ 48 ASSIGNMENTS ON OUTER-JOINS
+ 49  
+ 50 Display all the departmental information for all the existing employees and if 
+ a department has no employees display it as “No employees”.
+         select d.*,
+         case
+         when ename is null then 'NO Employee'
+         else ename
+         end as ename
+         from emp e,dept d where 
+         e.deptno(+) = d.deptno;
+
+ 51 Get all the matching & non-matching records from both the tables.
+       select * from emp e full join dept d on e.deptno = d.deptno;
+
+ 52 Get only the non-matching records from DEPT table (matching records shouldn’t be selected).   
+ 53                 select d.* from emp e,dept d where e.deptno(+)= d.deptno
+                    and e.deptno is null; 
+
+  ASSIGNMENTS ON SELF-JOINS
+ 54 Get all the employees who work in the same departments as of SCOTT
+             select ename from emp e where
+             deptno = (select deptno from emp where ename = 'SCOTT');
+
+
+55 Display all the employees who have joined before their managers.
+                select e1.ename from emp e1,emp e2 where 
+                e1.mgr = e2.empno and e1.hiredate<e2.hiredate
+
+ 56 List all the employees who are earning more than their managers.
+               select e1.ename from emp e1,emp e2 where 
+               e1.mgr = e2.empno and e1.sal>e2.sal;
+
+ 57 Fetch all the employees who are earning same salaries.
+using join-   select e1.ename from emp e1,emp e2 
+              where e1.sal = e2.sal and
+              e1.empno != e2.empno;
+
+using subquery - select ename from emp where
+                 sal IN (select sal from emp group by sal 
+                          having count(*)>1);
+                 
+
+ 58 Select all the employees who are earning same as SMITH.
+             select ename,sal from emp where sal = (select sal from emp 
+              where ename ='FORD');
+
+ 59 Display employee name , his date of joining, his manager name & his manager's date of joining.
+            select e1.ename,e1.hiredate,e2.hiredate mgrhire,e3.hiredate mgrmgrhire 
+            from emp e1,emp e2,emp e3 
+            where e1.mgr = e2.empno and e2.mgr = e3.empno;
+
+ 60 Select all the employees name along with their manager names, and if an employee does not have a manager, display him as “CEO”.
+       select e1.ename,
+       case 
+       when e2.ename is null then 'CEO' 
+       else e2.ename
+       end as mgrname
+       from emp e1,emp e2 where e1.mgr = e2.empno(+);
+
+ques.wqtd emp name,sam and manager name,sal.
+       select e1.ename,e1.sal empsal,e2.ename,e2.sal mgrsal from emp e1,emp e2 where
+       e1.mgr = e2.empno;

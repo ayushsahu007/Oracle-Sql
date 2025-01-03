@@ -1,0 +1,30 @@
+SELECT sal, rank
+FROM (
+    SELECT sal, 
+           (SELECT COUNT(DISTINCT e2.sal) 
+            FROM emp e2 
+            WHERE e2.sal > e1.sal) AS r
+    FROM emp e1
+) ranked_salaries
+WHERE r IN (2, 5);
+
+SELECT d.loc, e.ename, e.sal
+FROM emp e
+INNER JOIN dept d ON e.deptno = d.deptno
+WHERE 1 = (
+    SELECT COUNT(DISTINCT e2.sal)
+    FROM emp e2
+    INNER JOIN dept d2 ON e2.deptno = d2.deptno
+    WHERE d2.loc = d.loc AND e2.sal > e.sal
+);
+
+
+select * from(select d.loc,e.sal,dense_rank()over(partition by loc order by sal)
+emp e,dept d where e.deptno = d.deptno group by sal)den where den = 2;
+
+select * from(select d.loc,e.sal,dense_rank()over(order by sal)d
+emp e,dept d where e.deptno = d.deptno) where d =2 ;\
+
+multiple sal
+select * from(select emp.*,sal,dense_rank()over(order by sal)d from emp e)inner join dept d on 
+e.deptno = d.deptno where d IN (2,3);

@@ -1,0 +1,52 @@
+DECLARE
+    ename VARCHAR(20);
+    salary NUMBER; 
+    deptno NUMBER;
+BEGIN
+    SELECT ename, sal, deptno INTO ename, sal, deptno
+    FROM emp
+    WHERE deptno = &deptno;
+    DBMS_OUTPUT.PUT_LINE(ename || ' ' || salary || ' ' || deptno);
+
+END;
+/
+
+
+DECLARE
+    ename VARCHAR(20);
+    salary NUMBER; 
+    deptno NUMBER;
+BEGIN
+    SELECT ename, sal, deptno INTO ename, salary, deptno
+    FROM emp
+    WHERE deptno = &deptno;
+
+    DBMS_OUTPUT.PUT_LINE(ename || ' ' || salary || ' ' || deptno);
+
+END;
+/
+
+DECLARE
+    ename VARCHAR(20);
+    salary NUMBER; 
+    deptno NUMBER;
+BEGIN
+    SELECT ename, sal, deptno 
+    INTO ename, salary, deptno
+    FROM emp
+    WHERE deptno = &deptno
+    and rownum =1; 
+    DBMS_OUTPUT.PUT_LINE(ename || ' ' || salary || ' ' || deptno);
+
+END;
+/
+
+SELECT BRAND,PRICE,
+CASE
+WHEN PRICE > lag(price)over(partition by brand order by w_date)
+then 'PRICE IS INCRE'
+WHEN PRICE < lag(price)over(partition by brand order by w_date)
+then 'Price is Decre'
+else 'Brand Launch'
+end price status
+from wineshop;

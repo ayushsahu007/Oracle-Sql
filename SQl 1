@@ -1,0 +1,27 @@
+data - raw fact with description of attribute for an entity  // collection of information
+raw fact - processed data
+DDL -
+        CREATE  - create table tabN(colN,data type,Constraints);
+        ALTER   - add - alter table tabN add col colN data , constraint
+                  rename - alter table tabN rename olN to new N;
+                  modify -alter table tabN modify colN data type
+                  drop-   alter table tabN drop col colN
+                  rename table - alter table tabN rename ntN;
+        DROP    - drop tab tabN;
+        TRUCATE
+        PURGE
+DML -  
+        INSERT
+        UPDATE
+        DELETE
+DQL - 
+       SELECT
+       DISTINCT
+       ALIAS
+DCL -
+       GRANT 
+       REVOKE
+TCL -
+      COMMIT
+      ROLLBACK
+      SAVEPOINT

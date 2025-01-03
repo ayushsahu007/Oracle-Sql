@@ -1,0 +1,68 @@
+SQL Theory topics
+1.data,sql,dbms,rdbms,data model , types
+data type , constraints , ddl,dml,dql,dcl,tcl  
+
+Ques - i can drop primary key 
+  yes i can drop primary KEY Using 
+  ALTER TABLE table_name
+  DROP CONSTRAINT primary key;
+drop constraints --  ALTER TABLE table_name DROP CONSTRAINT constraint_name;
+
+function - single row
+           multirow
+
+subquery -  single row subquery
+            multirow subquery
+            nested row subquery
+            in-line subquery
+            co-related sub query
+
+Join -      cross join 
+            inner join
+            self join
+            outer join 
+                    1.left join
+                    2.right join
+                    3.full join
+set operators - union
+                union all
+                intersect 
+                minus a to b
+                minus b to a
+
+sub query operator -  ANY
+                      ALL
+                      EXISTS
+                      NOT EXISTS
+
+WINDOW FUNCTION - rank()
+                  dense_rank()
+                  row_number()
+                  lead()
+                  leg()
+
+VIEW -            Simple view 
+                  complex view
+                  materilized view
+
+Sequence
+case
+esacpe
+To_char()
+
+PL/SQL
+       
+Normalization --- 
+Defination
+anamolies
+Normal form till 5
+acid propertyies
+keys
+function depencies
+
+1.Partial Dependancy
+2.Transitive Dependancy
+3.Multi value Dependancy
+4.Join Dependancy
+
+

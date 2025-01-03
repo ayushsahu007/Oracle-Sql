@@ -1,0 +1,100 @@
+find nth highest and lowest using co related subquery,windows Function
+ques 1 .. 1.highest sal 
+co - select ename,a.sal from emp a where sal =
+(select max(b.sal) from emp b);
+
+dens_rank() - 
+select * from(select ENAME,sal,dense_rank()over(order by sal desc)d from emp) where d =1;
+
+rank() - 
+select * from(select ename,sal,rank()over(order by sal desc)r from emp) where r =1;
+
+row_number -
+select * from(select ename,sal,row_number()over(order by sal desc)rown from emp) where rown =1;
+
+Ques 2.2nd hiegest sal
+co -
+select distinct a.sal from emp a where 2 = (select count(distinct b.sal) from emp b where a.sal<= b.sal);
+
+dens_rank() - 
+select * from(select ENAME,sal,dense_rank()over(order by sal desc)d from emp) where d =2;
+
+rank() - 
+select * from(select ename,sal,rank()over(order by sal desc)r from emp) where r =2;
+
+row_number -
+select * from(select ename,sal,row_number()over(order by sal desc)rown from emp) where rown =2;
+
+Ques 3. 2 higest sal each loc;
+select ename,a.sal,d.loc from emp a inner join dept d on a.deptno = d.deptno where 2 =
+ (select count(distinct b.sal)
+from emp b where a.sal<=b.sal) 
+
+select ename,loc,sal from(select ename,sal,loc,dense_rank()over(partition by loc order by sal)d from emp e inner join dept d on e.deptno = d.deptno) where d =2;
+
+
+
+select ename,loc,sal,dense_rank()over(partition by loc order by sal)from emp e inner join dept d on e.deptno=d.deptno 
+where e.sal = (select max(sal) from emp where sal<(select max(sal) from emp));
+
+
+select ename,dname,sal from emp e,dept d where e.deptno = d.deptno and sal = (select max(sal) from emp);
+
+select e.ename,e.sal,d.loc,s.grade from emp e inner join dept d on e.deptno = d.deptno inner join salgrade s on 
+e.sal between s.losal and s.hisal where e.sal = (select max(sal) from emp);
+
+select e.ename,e.sal,d.loc,s.grade from emp e inner join dept d on e.deptno = d.deptno inner join salgrade s on 
+e.sal between s.losal and s.hisal where e.sal = (select max(sal) from emp where sal = (select max(sal)from emp));
+
+
+top 5 company based on higst number of employee 
+select c_name from(select c_name,count(*) from company group by c_name
+ order by count(*) desc) where rownum <=2;
+
+
+This query assigns a unique row number to each employee based on their salary in descending order, partitioned by department.
+
+select sal from (select ename,sal,deptno,row_number()over(partition by deptno order by sal desc)r from emp) where r = 2;
+
+This query calculates the average salary by department and returns employees who earn above the average salary of their respective departments.
+
+select avg(sal),deptno from emp group by deptno;
+
+This query finds employees who earn more than the average salary of their department.
+select sal,deptno from emp where sal > (select avg(sal) from emp e);
+
+This query finds the highest salary and the number of employees in each department.
+
+select d.dname,e.deptno,count(e.empno),MAX(e.SAL) from emp e inner join dept d on  e.deptno = d.deptno group by d.dname,e.deptno; 
+
+Query: Find pairs of employees in the same department who earn more than each other.
+select e1.sal,e1.ename,e2.sal,e2.ename from emp e1,emp e2 where e1.sal > e2.sal and e1.deptno = e2.deptno; 
+
+ Find departments that have more than 5 employees with a salary greater than 2500
+ select d.dname,SELECT deptno, COUNT(*) AS num_employees
+FROM emp
+WHERE sal > 50000
+GROUP BY deptno
+HAVING COUNT(*) > 5;
+ from dept d,emp e where e.deptno = d.deptno and e.sal>2500 group by e.ename,d.dname
+ having count(*)>2;SELECT deptno, COUNT(*) AS num_employees
+FROM emp
+WHERE sal > 500
+GROUP BY deptno
+HAVING COUNT(*) > 5;
+
+
+select a.ename,a.deptno,a.hiredate from emp a where hiredate =(select max(e.hiredate) from emp e  where e.deptno = a.deptno);
+
+
+higest sal  2,4,5
+select * from
+(select emp.*,dense_rank()over(order by sal desc)d from emp)where d IN (2,3,4);
+
+SELECT *
+FROM (SELECT emp.*, DENSE_RANK() OVER (ORDER BY sal DESC)d
+    FROM emp
+)
+WHERE d IN (2, 3, 4);
+/////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////

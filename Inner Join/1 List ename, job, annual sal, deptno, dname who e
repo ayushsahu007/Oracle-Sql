@@ -1,0 +1,54 @@
+1 List ename, job, annual sal, deptno, dname who earn 30000 per year and who are not clerks 
+ 2 List out the all employees by name and employee number along with their manager's name and employee number 
+ 3 Display ename,dname even if there no employees working in a particular department.
+ 4 Display the department name along with total salary in each department 
+ 5 Display employee name and department name for each employee
+ 6 Display location name of the employee who earn commission.
+ 7 Display Dept name of the employee who earn min salary and have no reporting manager.
+ 8 Display all the employees of Dept 30,10 with their annual salary and having at least 2 employees.
+ 9 list all the employees whose job is same as scott and their salary greater than Jones.
+ 10 Display Dept name,loc of all the employees who are reporting to Smith.
+ 11 List all the Dept name and location of all the salesman manager's manager.
+ 12 list employees who are working in research Dept and they are manager.
+ 13 Display the number of employees who are getting salary less than the Blake's manager.
+ 14 list the employee deptname and location of all the employees who are analyst,reporting to Blake.
+ 15 Display the employee names,hiredate,comm of Ford's manager
+ 16 Display ename, dname of all the employees whose salary less than avg sal of dept 30
+ 17 Display ename dname and loc of all the employees who are working for Jones
+ 18 Display ename dname of all the employees whose name starts with S
+ 19 List the dname who are not having any employee in it
+ 20 Display employee who are getting same commission
+ 21 Display all Countries along with the Regions .
+ 22 Display all Cities and the Country it belongs. 
+ 23 Display all Regions and their respective Countries and Cities. 
+ 24 Display all Regions, Countries and Cities which are not belongs to Europe. 
+ 25 Display the region name of India.
+ 26 Display all the Countries along with their Cities and also the countries doesn't have Cities. 
+ 27 Display all employees first name and last name as 'employee name ' with their managers first
+ 28 name and last name as 'manager name ' and also the employees who doesn't have manager.
+ 29 Display all departments and the city to which it belongs. 
+ 30 Display cities doesn't have any departments. 
+ 31 Display all the Countries of America Region
+ 32 DISPLAY ALL THE DEPT NAMES IRRESPECTIVE OF ANY EMPLOYEE WORKING IN IT OR NOT. IF AN EMPLOYEE IS WORKING DISPLAY HIS NAME.
+ 33 WRITE A QUERY TO DISPLAY EMPLOYEE NAME, JOB, DNAME, LOCATION OF ALL EMPLOYEES WHO ARE WORKING AS ACTUAL MANAGERS AND WORKS AT CHICAGO.
+ 34 LIST THE DEPARTMENT NAMES IN WHICH THE EMPLOYEES ARE HIRED BETWEEN 1ST OF JAN 1981 AND 31ST DEC 1982 WITH SALARY MORE THAN 1800.
+ 35 DISPLAY 2ND LEAST SALARY FROM EMPLOYEE TABLE.
+ 36 LIST THE EMPLOYEES WHOSE ANNUAL SALARY IS GREATER THAN 1500 AND WHO ARE JOINED BEFORE 1982 ONLY.
+ 37 DISPLAY DNAME, LOC, DEPTNO OF EMPLOYEES WHO HAS SAME REPORTING MANAGER
+ 38 DISPLAY EMPLOYEE NAME ALONG WITH THEIR MANAGER NAME.
+ 39 DISPLAY EMPLOYEE NAME AND HIS DEPT NAME FOR THE EMPLOYEES WHOSE NAME STARTS WITH ‘S’.
+ 40 DISPLAY EMPLOYEES WHO ARE GETTING SAME SALARY.
+ 41 Display all the employees whose job same as 'SMITH' and department same as 'JONES' and salary more than 'SCOTT
+ 42 ASSIGNMENTS ON EQUI-JOINS
+ 43 Display all the managers & clerks who work in Accounts and Marketing departments.
+ 44 Display all the salesmen who are not located at DALLAS.
+ 45 Select department name & location of all the employees working for CLARK.
+ 46 Select all the departmental information for all the managers
+ 47 Select all the employees who work in DALLAS.
+ 48 ASSIGNMENTS ON OUTER-JOINS
+ 49  
+ 50 Display all the departmental information for all the existing employees and if a department has no employees display it as “No employees”.
+ 51 Get all the matching & non-matching records from both the tables.
+ 52 Get only the non-matching records from DEPT table (matching records shouldn’t be selected).
+ 53 ASSIGNMENTS ON SELF-JOINS
+ 54 Get all the employees who work in the same departments as of SCOTT

@@ -1,0 +1,87 @@
+Sql All Function Assigment
+
+-----------------------------Single Row Function ----------------------------------
+
+1.Character Single Row Funtion
+         1.case single - 
+                       i.UPPER CASE           upper(arg)
+                       ii.lower case          lower(arg)
+                       iii.initcap            initcap(arg)
+         2.Character Manupulation single row function      
+                       i.substr(os,pos,lenth)
+                       ii.replace(os,substring,newstring)
+                       iii.trim(leading/trailing/both 'char' from os )
+                       iv.reverse(arg)
+                       v.instr(os,char,pos,nth occur)
+                       vi.concatination
+--------------------------- ----------------------------
+2.Number Single Row function
+        1.mod(a,b)=rem  [mod(divident,diviser)=reminder]
+        2.square(arg)
+        3.power(number,power)
+        4.abs()
+        5.round(number,scale)
+        6.trunc(number,scale)
+        7.length(arg)
+----------------------------------------------------------------------------
+3.Date Single Row Function
+        1.add_months('Date',no.of months)
+        2.months_between(date1,date2)
+        3.extract(year/month/days from colN)
+        4.last_day(date)
+-------------------------------------------------------------------------------
+4.Gernral SIngle Row Function
+        1.nav(agr1,arg2)
+        2.nav2(arg1,arg2,arg3)
+-------------------------------------------------------------------------------------
+
+
+1.WQTD First 3 letter of Empolyee Name
+2.WQTD First letter of Empolyee Name
+3.WQTD Last 3 letter from priya
+4.WQTD Last letter from priya
+5.WQTD Employee Name where employee name start with vowel character using substr
+6.
+
+
+7.WQTD 1st half of emp name
+8.WQTD 2nd Half of emp name
+---------------------------------------------------------------
+1.WQTD 2nd Occuring 'A' index in ename
+2.WQT Delete 1st letter in emp name
+3.WQT Delete Last Letter in emp name
+4.WQT replace A letter B in emp name
+5.WQT employee name,sal where emp earing even salry
+6.WQT emp name where emp has odd no of character
+7.WQT emp name where emp has even no of character
+8.WQT find number of 'A' charcter is ANANYA
+9.WQT find number of Consonants Character in emp name MILER
+10.WQT find number of vowel charcter in emp name MILLER
+11.WQT replace 1st two letter of emp name with 'AA'
+12.WQT replace last two letter of emp name 'YY'
+13.WQT replace 1st two letter of emp name with last two letter of designation
+14.WQT find 1st name 
+15/WQT find middle name
+16.WQT find Last name
+17.WQTD Emp name,hiredate where emp hire in the month 2nd letter is consonats without using like operator
+18.WQTD emp name,designation where 2nd letter of emp name and 2nd letter of designation are same
+19.WQTD emp name Designation where last 2nd letter of ename and last 2nd letter of designation are same
+20.WQTD Square root value for the salary
+21.WQTD last two letter of employee name with 1st two letter of designation
+
+
+----------------------------------DATE SINGLE ROW FUNCTION ---------------------------------------------
+1.WQTD emp name,emp sal,emp hiredate with addition of 12 month
+2.WQTD ename ,emp hiredate month
+3.WQTD ename,emp hire in year
+4.WQTD ename,emp experiance in year
+5.WQTD emp deatils where emp is having experience more than 43 year
+6.WQTD find 1st day in the current month
+7.WQTD find last day in the current month
+8.WQTD find next month 1st day in the month
+9.WQTD find next month last day in the month
+10.WQTD find last month 1st day in the month
+11.WQTD find last month last day in the month
+
+=-------------------Aggregate Function- mix SIngle row function--------------------------------------------
+

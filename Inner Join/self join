@@ -1,0 +1,26 @@
+1.WQTD Employee name , location and manger name,location
+Oracle - select e1.ename,d1.loc,e2.ename as 
+         mgr,d2.loc as mgrloc 
+         from emp e1,dept d1,emp e2,dept d2
+         where e1.mgr = e2.empno and 
+               e1.deptno = d1.deptno and 
+               e2.deptno = d2.deptno;
+                
+
+ANSI - select e1.ename,d1.loc,e2.ename as 
+         mgr,d2.loc as mgrloc from 
+         emp e1 inner join dept d1 on e1.deptno = d1.deptno self join emp e2 on e1.mgr = e2.empno 
+
+=================================================
+question extra - 
+1.WQTD max sal of emp who working location in chicago
+
+ANSI -
+select max(sal) from emp inner join dept on emp.deptno = dept.deptno where loc = 'CHICAGO';
+
+Oracle - select max(sal) from emp,dept where emp.deptno = dept.deptno and loc = 'CHICAGO';
+
+2.WQTD dept name and total amount spent by each  dept as salary for their employees.
+
+3.
+

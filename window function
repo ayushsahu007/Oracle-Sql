@@ -1,0 +1,145 @@
+select ename,sal,
+case
+when
+sal>lag(sal)over(order by hiredate) then 'earning sal more the prev'
+when 
+sal<lag(sal)over(order by hiredate) then 'earning sal less then prev'
+else 'First sal'
+end staus
+from emp;
+
+select ename,sal,
+case
+when
+sal>lag(sal)over(order by hiredate) then 'earning sal more the prev'
+when 
+sal<lag(sal)over(order by hiredate) then 'earning sal less then prev'
+else 'First sal'
+end staus
+from emp;
+
+
+Loop
+//normal loop
+//1 to 5 
+declare
+a number:= 1;
+begin 
+loop
+dbms_output.put_line(a);
+a:=a+1;
+exit when a>5;
+end loop;
+end;
+/
+
+.........5 to 1
+declare
+a number:= 5;
+begin 
+loop
+dbms_output.put_line(a);
+a:=a-1;
+exit when a<1;
+end loop;
+end;
+/
+
+
+.........even number 1 to 10
+declare
+a number:= 1;
+begin
+loop
+ if mod(a,2)=0 then 
+  dbms_output.put_line(a);
+ end if;
+ a :=a+1;
+ exit when a>10;
+ end loop;
+end;
+/
+
+................for loop
+// 1 to 5 
+begin 
+for i in 1..5 loop
+dbms_output.put_line(i);
+end loop;
+end;
+/
+
+.....Reverse 5 to 1
+begin 
+for i in reverse 1..5 loop
+dbms_output.put_line(i);
+end loop;
+end;
+/
+
+/// even number 1 to 10
+begin 
+for i in 1..10 loop
+if mod(i,2)=0 then
+dbms_output.put_line(i);
+end if;
+end loop;
+end;
+/
+
+...........While loop
+declare
+a number := 1;
+begin 
+while a<=10 loop
+dbms_output.put_line(a);
+a:=a+1;
+end loop;
+end;
+/
+
+declare
+name varchar(20);
+salary number;
+begin
+select ename,sal into name,salary
+from emp where empno = 7698;
+dbms_output.put_line(name||' '||salary);
+end;
+/
+
+...................dynamically fetch/................
+declare
+name varchar(20);
+salary number;
+begin
+select ename,sal into name,salary
+from emp where empno = &empno;
+dbms_output.put_line(name||' '||salary);
+end;
+/
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+   name VARCHAR2(20);
+   salary NUMBER; 
+BEGIN
+   SELECT ename, sal INTO name, salary
+   FROM emp
+   WHERE empno = &empno;
+   
+   DBMS_OUTPUT.PUT_LINE(name || ' ' || salary);
+END;
+/
+
+begin 
+for i in 1..10 loop
+      fact = i*fact;
+dbms_output.put_line(i);
+end if;
+end loop;
+end;
+/
+
+
